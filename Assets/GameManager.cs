@@ -270,7 +270,12 @@ public class GameManager : MonoBehaviour
 
             if (gameEnded) break;
 
+            int finishedPlayer = currentPlayer;
             currentPlayer = (currentPlayer == 1) ? 2 : 1;
+
+            // Сразу гасим "Round" завершившего ход игрока, а не ждём его следующего хода —
+            // иначе там до сих пор виден его последний (или сгоревший) счёт раунда
+            OnRoundScoreChanged?.Invoke(finishedPlayer, 0);
         }
 
         canAcceptInput = false;
