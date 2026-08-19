@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Правила игры")]
     [Tooltip("Сколько очков нужно набрать, чтобы выиграть партию")]
-    public int winScore = 4000;
+    public int winScore = 3000;
 
     [Tooltip("Сколько секунд нужно удерживать ESC для сдачи")]
     public float surrenderHoldTime = 2f;
@@ -89,13 +89,9 @@ public class GameManager : MonoBehaviour
         {
             if (winPanel != null && winPanel.activeSelf)
             {
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Escape))
                 {
                     RestartGame();
-                }
-                else if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    QuitGame();
                 }
             }
             return;
@@ -396,7 +392,7 @@ public class GameManager : MonoBehaviour
             {
                 winPanel.SetActive(true);
                 if (winText != null)
-                    winText.text = $"Игрок {currentPlayer} побеждает!\nСчёт: {scores[currentPlayer - 1]}";
+                    winText.text = $"Player {currentPlayer} is winner! Score: {scores[currentPlayer - 1]}";
             }
         }
     }
